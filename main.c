@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdlib.h>
 
 //defining vars
 #define MAX_LINES 100
@@ -38,13 +41,23 @@ StringArray load_file() {
 }
 
 //getting a random word from the list
-//TODO: get this shit working
 char* getting_word(StringArray array) {
+    //getting the count of the list
+    int list_size = array.count;
+
+    //getting the random word from the list
+    srand(time(NULL));
+    int random_inx = rand() % list_size;
+    char* word = array.lines[random_inx];
+
+    return word;
 
 }
 
 
 int main() {
     StringArray array_list = load_file();
+    char* word = getting_word(array_list);
+    printf("%s\n", word);
     return 0;
 }

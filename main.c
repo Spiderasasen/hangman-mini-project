@@ -37,10 +37,14 @@ StringArray load_file() {
     return result;
 }
 
+//getting a random word from the list
+//TODO: get this shit working
+char* getting_word(StringArray array) {
+
+}
+
+
 int main() {
     StringArray array_list = load_file();
-    for (int i = 0; i < array_list.count; i++) {
-        printf("%s\n", array_list.lines[i]);
-    }
     return 0;
 }

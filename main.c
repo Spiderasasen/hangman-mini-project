@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 //defining vars
 #define MAX_LINES 100
@@ -10,7 +12,37 @@ typedef struct {
     int count;
 } StringArray;
 
+//file reader
+StringArray load_file() {
+    StringArray result = {.count = 0};
+
+    char* filename = "text.txt";
+
+    //getting the file
+    FILE *f = fopen(filename, "r");
+
+    printf("Trying to read %s\n", filename);
+
+    //checking if the file was opened
+    if (!f) {
+        printf("File not found\n");
+        return result;
+    }
+
+    printf("%s, has been found\n", filename);
+
+    //placing all the inputs into the file
+    while (fgets(result.lines[result.count], MAX_LEN, f)) {
+        result.count++;
+    }
+    fclose(f);
+    return result;
+}
+
 int main() {
-    printf("Hello world!");
+    StringArray array_list = load_file();
+    for (int i = 0; i < array_list.count; i++) {
+        printf("%s\n", array_list.lines[i]);
+    }
     return 0;
 }

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
 
 //defining vars
 #define MAX_LINES 100
@@ -54,10 +55,20 @@ char* getting_word(StringArray array) {
 
 }
 
+//counting the number of letters in a word
+int letter_count(char* word) {
+    int count = 0;
+    for (int i = 0; i < strlen(word); i++) {
+        ++count;
+    }
+    return --count;
+}
 
 int main() {
     StringArray array_list = load_file();
     char* word = getting_word(array_list);
     printf("%s\n", word);
+    int words_count = letter_count(word);
+    printf("%d\n", words_count);
     return 0;
 }

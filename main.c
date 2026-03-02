@@ -103,7 +103,8 @@ int main() {
     printf("Length of word: %d\n", words_count);
     space_print(words_count_null);
     char guess;
-    scanf("Your guess: \n", &guess);
+    printf("Guess a letter: \n");
+    scanf("%c", &guess);
 
     if (checking_guess(guess, word, words_count_null)) {
         printf("There is a letter like this!\n");

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdlib.h>
 #include <string.h>
 
 //defining vars
@@ -64,12 +63,32 @@ int letter_count(char* word) {
     return count;
 }
 
+//printing the correct ammount of blank spaces in the word
+void space_print(int word_size) {
+    for (int i = 0; i < word_size; i++) {
+        printf("_");
+    }
+    printf("\n");
+}
+
+//keeping track of how many times you can miss
+void missing_tracker(int misses) {
+    printf("Tries Left: %d\n", misses);
+}
+
 int main() {
+    //loading the main text file
     StringArray array_list = load_file();
+
+    //vars that will help make the game
     char* word = getting_word(array_list);
-    printf("%s\n", word);
     int words_count_null = letter_count(word); //for looping the original string
     int words_count = --words_count_null; //for displaying the word
+    int misses_left = 10;
+
+    //for the game
+    missing_tracker(misses_left);
+    space_print(words_count_null);
     printf("%d\n", words_count);
     return 0;
 }

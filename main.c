@@ -76,6 +76,17 @@ void missing_tracker(int misses) {
     printf("Tries Left: %d\n", misses);
 }
 
+int checking_guess(char guess, char* word, int word_size) {
+    int i = 0;
+    while (i < word_size) {
+        if (guess == word[i]) {
+            return 1;
+        }
+        i++;
+    }
+    return 0;
+}
+
 int main() {
     //loading the main text file
     StringArray array_list = load_file();
@@ -86,9 +97,21 @@ int main() {
     int words_count = --words_count_null; //for displaying the word
     int misses_left = 10;
 
+    printf("Orginal word: %s", word);
     //for the game
     missing_tracker(misses_left);
+    printf("Length of word: %d\n", words_count);
     space_print(words_count_null);
-    printf("%d\n", words_count);
+    char guess;
+    scanf("Your guess: \n", &guess);
+
+    if (checking_guess(guess, word, words_count_null)) {
+        printf("There is a letter like this!\n");
+    }
+    else {
+        printf("No letter here\n");
+    }
+
+
     return 0;
 }

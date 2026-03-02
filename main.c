@@ -61,14 +61,15 @@ int letter_count(char* word) {
     for (int i = 0; i < strlen(word); i++) {
         ++count;
     }
-    return --count;
+    return count;
 }
 
 int main() {
     StringArray array_list = load_file();
     char* word = getting_word(array_list);
     printf("%s\n", word);
-    int words_count = letter_count(word);
+    int words_count_null = letter_count(word); //for looping the original string
+    int words_count = --words_count_null; //for displaying the word
     printf("%d\n", words_count);
     return 0;
 }

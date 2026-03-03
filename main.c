@@ -71,11 +71,6 @@ void space_print(int word_size) {
     printf("\n");
 }
 
-//keeping track of how many times you can miss
-void missing_tracker(int misses) {
-    printf("Tries Left: %d\n", misses);
-}
-
 int checking_guess(char guess, char* word, int word_size) {
     int i = 0;
     while (i < word_size) {
@@ -87,6 +82,18 @@ int checking_guess(char guess, char* word, int word_size) {
     return 0;
 }
 
+//placing things into a list
+void appendList(char guess, char array[], int array_size) {
+    for (int i = 0; i < array_size; i++) {
+        if (guess != array[i]) {
+            array[i] = guess;
+        }
+    }
+}
+
+//printing out the list with the guess
+
+
 int main() {
     //loading the main text file
     StringArray array_list = load_file();
@@ -96,21 +103,31 @@ int main() {
     int words_count_null = letter_count(word); //for looping the original string
     int words_count = --words_count_null; //for displaying the word
     int misses_left = 10;
+    char correct[MAX_LEN];
+    char incorrect[MAX_LEN];
 
     printf("Orginal word: %s", word);
     //for the game
-    missing_tracker(misses_left);
+    printf("Tries Left: %d\n", misses_left);
     printf("Length of word: %d\n", words_count);
     space_print(words_count_null);
+
+    //telling th euser which letters are incrroect
+    printf("Incorrect word: %s", incorrect);
+
     char guess;
     printf("Guess a letter: \n");
     scanf("%c", &guess);
 
     if (checking_guess(guess, word, words_count_null)) {
-        printf("There is a letter like this!\n");
+        printf("The letter %c, is in the word! \n", guess);
+        int correct_size = letter_count(correct);
+        appendList(guess, correct, correct_size);
+        printf("%s",correct);
     }
     else {
-        printf("No letter here\n");
+        printf("%c does not exist in this word.\n", guess);
+        misses_left--;
     }
 
 

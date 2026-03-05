@@ -143,32 +143,35 @@ int main() {
     char incorrect[MAX_LEN];
     int correct_size = letter_count(correct);
     int incrrect_size = letter_count(correct);
+    int win_check = 0;
 
     printf("Orginal word: %s", word);
     //for the game
-    printf("Tries Left: %d\n", misses_left);
-    printf("Length of word: %d\n", words_count);
-    space_print(words_count_null);
+    while (win_check != 1){
+        printf("Tries Left: %d\n", misses_left);
+        printf("Length of word: %d\n", words_count);
+        space_print(words_count_null);
 
-    //telling th euser which letters are incrroect
-    printf("Incorrect word: %s\n", incorrect);
+        //telling th euser which letters are incrroect
+        printf("Incorrect word: %s\n", incorrect);
 
-    char guess;
-    printf("Guess a letter: \n");
-    scanf("%c", &guess);
+        char guess;
+        printf("Guess a letter: \n");
+        scanf("%c", &guess);
 
-    if (checking_guess(guess, word, words_count_null)) {
-        printf("The letter %c, is in the word! \n", guess);
-        appendList(guess, correct, correct_size);
-        // printf("%s\n",correct);
+        if (checking_guess(guess, word, words_count_null)) {
+            printf("The letter %c, is in the word! \n", guess);
+            appendList(guess, correct, correct_size);
+            // printf("%s\n",correct);
+        }
+        else {
+            printf("%c does not exist in this word.\n", guess);
+            misses_left--;
+            appendList(guess, incorrect, incrrect_size);
+        }
+        word_revile(correct, word, words_count_null, correct_size);
+        win_check = is_finished(correct, correct_size, word, words_count_null, words_count);
     }
-    else {
-        printf("%c does not exist in this word.\n", guess);
-        misses_left--;
-        appendList(guess, incorrect, incrrect_size);
-    }
-    word_revile(correct, word, words_count_null, correct_size);
-
 
     return 0;
 }

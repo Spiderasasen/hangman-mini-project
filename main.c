@@ -109,6 +109,27 @@ void word_revile(char correct_letters[], char* word, int word_size, int correct_
     }
 }
 
+//checks the correct list to see if it cotains all letters of the word
+int is_finished(char correct_letters[], int correct_size, char* word, int word_size_null, int word_size) {
+    //var to count all the letters that are in the word
+    int count = 0;
+
+    //loops
+    for (int i = 0; i < correct_size; i++) {
+        for (int j = 0; j < word_size_null; j++) {
+            if (correct_letters[i] == word[j]) {
+                count++;
+            }
+        }
+    }
+
+    //checking if the count is matches the word_size
+    if (count == word_size) {
+        return 1;
+    }
+    return 0;
+}
+
 int main() {
     //loading the main text file
     StringArray array_list = load_file();
